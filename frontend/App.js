@@ -1,13 +1,6 @@
 import { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import { StyleSheet, Text, View, FlatList, Keyboard } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import SingleTodo from "./components/SingleTodo/SingleTodo";
 import TodoInput from "./components/TodoInput/TodoInput";
 
@@ -22,57 +15,62 @@ export default function App() {
   const addTodoHandler = () => {
     // addTodoThunk(currTodo);
     setTodos((existingTodos) => [
-      ...existingTodos,
       { text: currTodo, id: Math.random().toString() },
+      ...existingTodos,
     ]);
     setCurrTodo("");
+    Keyboard.dismiss();
   };
 
   const deleteTodoHandler = (id) => {
+    // console.log("clicked")
     setTodos((existingTodos) => {
       return existingTodos.filter((todo) => todo.id !== id);
     });
   };
 
   return (
-    <View style={styles.appContainer}>
-      <View style={styles.appNameContainer}>
-        <Text style={styles.appNameText}>DueToDo</Text>
-      </View>
-      <TodoInput
-        currTodo={currTodo}
-        todoInputHandler={todoInputHandler}
-        addTodoHandler={addTodoHandler}
-      />
-      <View style={styles.todoListContainer}>
-        <Text style={styles.todoListTitle}>CURRENT TODOS</Text>
-        {/* ScrollView will render all items in the list at the same time. Even the ones that are off screen. Even if there are 10,000.*/}
-        {/* <ScrollView style={styles.todosList}>
-          {todos &&
-            todos.map((todo, i) => {
-              return (
-                <View key={i} style={styles.singleTodo}>
-                  <Text style={styles.singleTodoText}>{todo}</Text>
-                </View>
-              );
-            })}
-        </ScrollView> */}
-        {/* FlatList will lazy render items that are not immediately in view on the screen */}
-        <FlatList
-          data={todos}
-          renderItem={(todo) => {
-            return (
-              <SingleTodo
-                todo={todo.item}
-                id={todo.item.id}
-                deleteTodoHandler={deleteTodoHandler}
-              />
-            );
-          }}
-          style={styles.todosList}
+    <>
+      <StatusBar style="light" />
+      <View style={styles.appContainer}>
+        <View style={styles.appNameContainer}>
+          <Text style={styles.appNameText}>DueToDo</Text>
+        </View>
+        <TodoInput
+          currTodo={currTodo}
+          todoInputHandler={todoInputHandler}
+          addTodoHandler={addTodoHandler}
         />
+        <View style={styles.todoListContainer}>
+          <Text style={styles.todoListTitle}>CURRENT TODOS</Text>
+          {/* ScrollView will render all items in the list at the same time. Even the ones that are off screen. Even if there are 10,000.*/}
+          {/* <ScrollView style={styles.todosList}>
+            {todos &&
+              todos.map((todo, i) => {
+                return (
+                  <View key={i} style={styles.singleTodo}>
+                    <Text style={styles.singleTodoText}>{todo}</Text>
+                  </View>
+                );
+              })}
+          </ScrollView> */}
+          {/* FlatList will lazy render items that are not immediately in view on the screen */}
+          <FlatList
+            data={todos}
+            renderItem={(todo) => {
+              return (
+                <SingleTodo
+                  todo={todo.item}
+                  id={todo.item.id}
+                  deleteTodoHandler={deleteTodoHandler}
+                />
+              );
+            }}
+            style={styles.todosList}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 

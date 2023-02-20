@@ -1,26 +1,31 @@
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet, Pressable, Text } from "react-native";
 
-const TodoInput = ({currTodo, todoInputHandler, addTodoHandler}) => {
-
+const TodoInput = ({ currTodo, todoInputHandler, addTodoHandler }) => {
   return (
     <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="TODO"
-          style={styles.textInput}
-          onChangeText={todoInputHandler}
-          value={currTodo}
-          placeholderTextColor="#a4a8aa"
-        />
-        <Button
-          title="+"
-          // title="CREATE"
-          onPress={addTodoHandler}
-          color="#3a92f7"
-          // buttonStyle={styles.createButton}
-        />
-      </View>
-  )
-}
+      <TextInput
+        placeholder="TODO"
+        style={styles.textInput}
+        onChangeText={todoInputHandler}
+        value={currTodo}
+        placeholderTextColor="#a4a8aa"
+        onSubmitEditing={addTodoHandler}
+      />
+      {/* <Button
+        title="+"
+        // title="CREATE"
+        onPress={addTodoHandler}
+        color="#3a92f7"
+        // buttonStyle={styles.createButton}
+      /> */}
+      <Pressable onPress={addTodoHandler}>
+        <View>
+          <Text style={styles.addButtonText}>+</Text>
+        </View>
+      </Pressable>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -43,6 +48,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 8,
   },
-})
+  addButtonContainer: {
+
+  },
+  addButtonText: {
+    fontSize: 36,
+    color: "#3a92f7",
+  },
+});
 
 export default TodoInput;

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "RNApp1",
-    "slug": "RNApp1",
+    "name": "DueToDo",
+    "slug": "DueToDo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

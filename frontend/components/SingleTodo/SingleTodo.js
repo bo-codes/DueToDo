@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import { Swipeable } from "react-native-gesture-handler";
+import { Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
 
 const SingleTodo = ({todo, deleteTodoHandler, id}) => {
 
@@ -15,15 +15,17 @@ const SingleTodo = ({todo, deleteTodoHandler, id}) => {
   }
 
   return (
-    <Swipeable
-      overshootFriction={4}
-      leftThreshold="40px"
-      renderRightActions={leftSwipe}
-    >
-      <View style={styles.singleTodo}>
-        <Text style={styles.singleTodoText}>{todo.text}</Text>
-      </View>
-    </Swipeable>
+    <GestureHandlerRootView>
+      <Swipeable
+        overshootFriction={4}
+        leftThreshold="40px"
+        renderRightActions={leftSwipe}
+      >
+        <View style={styles.singleTodo}>
+          <Text style={styles.singleTodoText}>{todo.text}</Text>
+        </View>
+      </Swipeable>
+    </GestureHandlerRootView>
   )
 }
 

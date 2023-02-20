@@ -33,14 +33,6 @@ export default function App() {
     <>
       <StatusBar style="light" />
       <View style={styles.appContainer}>
-        <View style={styles.appNameContainer}>
-          <Text style={styles.appNameText}>DueToDo</Text>
-        </View>
-        <TodoInput
-          currTodo={currTodo}
-          todoInputHandler={todoInputHandler}
-          addTodoHandler={addTodoHandler}
-        />
         <View style={styles.todoListContainer}>
           <Text style={styles.todoListTitle}>CURRENT TODOS</Text>
           {/* ScrollView will render all items in the list at the same time. Even the ones that are off screen. Even if there are 10,000.*/}
@@ -69,6 +61,11 @@ export default function App() {
             style={styles.todosList}
           />
         </View>
+        <TodoInput
+          currTodo={currTodo}
+          todoInputHandler={todoInputHandler}
+          addTodoHandler={addTodoHandler}
+        />
       </View>
     </>
   );
@@ -81,15 +78,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingTop: 70,
     backgroundColor: "#212448",
-  },
-  appNameContainer: {
-    width: "100%",
-    paddingHorizontal: 20,
-  },
-  appNameText: {
-    color: "#ffffff",
-    fontSize: 26,
-    fontWeight: "bold",
   },
   todoListContainer: {
     // borderWidth: 1,
